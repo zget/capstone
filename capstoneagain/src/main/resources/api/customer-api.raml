@@ -1,0 +1,80 @@
+#%RAML 1.0
+baseUri: http://api.icraftsoft.net:6060
+version: v1
+title: Customers API
+  
+/users:
+  get:
+    displayName: Get All Users
+    description: Retrieves a list of all users
+    responses:
+      200:
+        description: Success
+        body:
+          application/json:
+            examples: !include sampleUsersResponse.raml
+      400:
+        body:
+          application/json:
+            examples:
+              message: Error retrieving data from the Users database
+  post:
+    displayName: Add user
+    body:
+      application/json:
+    responses:
+      201:
+        description: User added
+        body:
+          application/json:
+            examples: !include sampleUserResponse.raml
+      400:
+        body:
+          application/json:
+            examples:
+              message: Error creating user data
+  /{id}:
+    get:
+      displayName: Add user by id
+      responses:
+        202: 
+          description: Success
+          body:
+            application/json:
+              examples: !include sampleUserResponse.raml
+        400:
+          body:
+            application/json:
+              examples:
+                message: Error adding a user failed
+
+    delete:
+      displayName: Delete user by id
+      responses:
+        203:
+          description: Success
+          body:
+            application/json:
+              examples:                
+                message: User successfully deleted
+        400:
+          body:
+            application/json:
+              examples:
+                message: Error deleting user failed
+    put:
+      displayName: Update user by id
+      body:
+        application/json:
+      responses:
+        204:
+          description: Success
+          body:
+            application/json:      
+              examples: 
+                message: User successfully updated
+        400:
+          body:
+            application/json:
+              examples:
+                message: Error updating user failed
